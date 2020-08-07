@@ -15,15 +15,11 @@
 --  * A list of attachment names for each note.
 --
 -- Known issues:
---  * Only the names of attachments are exported, not the files
---    themselves.  (Look for the files in
---    ~Library/Group Containers/group.com.apple.notes/Media).
+--  * Only the names of attachments are exported, not the files themselves.  (Look for the files in ~Library/Group Containers/group.com.apple.notes/Media).
 --  * Some attachment types (e.g. app links) show up as "Missing value"
 --  * Some formatting is lost.
---  * A note with the same title as a previously exported note will be
---    overwritten.
---  * It will exported notes in the "Recently Deleted" folder which
---    haven't been purged from disk yet.
+--  * A note with the same title as a previously exported note will be overwritten.
+--  * It will exported notes in the "Recently Deleted" folder which haven't been purged from disk yet.
 --
 
 set exportFolder to (choose folder) as string
@@ -44,8 +40,7 @@ on replaceText(find, replace, subject)
 end replaceText
 
 
--- Get an HTML file to save the note in.  We have to escape
--- the colons or AppleScript gets upset.
+-- Get an HTML file to save the note in.  We have to escape the colons or AppleScript gets upset.
 on noteNameToFilePath(noteName)
 	global exportFolder
 	return (exportFolder & replaceText(":", "_", noteName) & ".html")
