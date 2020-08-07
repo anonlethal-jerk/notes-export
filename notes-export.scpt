@@ -1,6 +1,8 @@
 --
 -- notes-export.scpt
 -- Alex Chan <alex@alexwlchan.net>
+-- edits by:
+-- A NonLethal Jerk <anonlethaljerk@gmail.com>
 --
 -- Export all the notes from Notes.app into a folder as HTML text.
 -- A very basic backup script.
