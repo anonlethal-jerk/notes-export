@@ -11,15 +11,15 @@
 --  * Select a folder to export files to
 --
 -- Output:
---  * A collection of (Latin-1 encoded) HTML files
+--  * A collection of UTF-16 BE encoded (AppleScript's default?) HTML files
 --  * A list of attachment names for each note.
 --
 -- Known issues:
---  * Only the names of attachments are exported, not the files themselves.  (Look for the files in ~Library/Group Containers/group.com.apple.notes/Media).
+--  * Only the names of attachments are exported, not the files themselves. (Look for the files in ~Library/Group Containers/group.com.apple.notes/Media).
 --  * Some attachment types (e.g. app links) show up as "Missing value"
 --  * Some formatting is lost.
---  * A note with the same title as a previously exported note will be overwritten.
---  * It will exported notes in the "Recently Deleted" folder which haven't been purged from disk yet.
+--  * A note with the same title and date/time as a previously exported note will be overwritten. (not likely)
+--  * It will export notes in the "Recently Deleted" folder which haven't been purged from disk yet.
 --
 
 set exportFolder to (choose folder) as string
@@ -51,8 +51,12 @@ tell application "Notes"
 	set attachmentLog to open for access (exportFolder & "_attachments.txt") with write permission
 	repeat with theNote in notes
 
+		-- Get basic Date and Time (seconds since start of day) for filename
+		set {year:y, month:m, day:d, time:t} to (creation date of theNote as date)
+		set cDate to y & "_" & m & "_" & d & "-" & t
+
 		-- Write the body of the note out to file as HTML
-		set filepath to noteNameToFilePath(name of theNote as string) of me
+		set filepath to noteNameToFilePath(cDate & "-" & name of theNote as string) of me
 		set noteFile to open for access filepath with write permission
 		write (body of theNote as string) to noteFile as Unicode text
 		close access noteFile
