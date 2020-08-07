@@ -19,7 +19,7 @@ To go in the other direction, see Steven Frank's [notes-import script](https://g
     --  * Select a folder to export files to
     --
     -- Output:
-    --  * A collection of (Latin-1 encoded) HTML files
+    --  * A collection of (UTF-16 BE encoded) HTML files
     --  * A list of attachment names for each note.
     --
     -- Known issues:
